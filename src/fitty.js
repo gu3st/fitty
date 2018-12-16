@@ -91,6 +91,9 @@ export default ((w) => {
       f.maxSize
     );
 
+    // lets round the new font size because
+    f.currentFontSize = f.floorSize ? Math.floor(f.currentFontSize) : f.currentFontSize
+
     // if allows wrapping, only wrap when at minimum font size (otherwise would break container)
     f.whiteSpace = f.multiLine && f.currentFontSize === f.minSize
       ? 'normal'
@@ -238,6 +241,7 @@ export default ((w) => {
     minSize: 16,
     maxSize: 512,
     multiLine: true,
+    floorSize: true,
     observeMutations: 'MutationObserver' in w ? mutationObserverDefaultSetting : false
   };
 

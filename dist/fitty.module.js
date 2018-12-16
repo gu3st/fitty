@@ -103,6 +103,9 @@ exports.default = function (w) {
     // let's calculate the new font size
     f.currentFontSize = Math.min(Math.max(f.minSize, f.availableWidth / f.currentWidth * f.previousFontSize), f.maxSize);
 
+    // lets round the new font size because
+    f.currentFontSize = f.floorSize ? Math.floor(f.currentFontSize) : f.currentFontSize;
+
     // if allows wrapping, only wrap when at minimum font size (otherwise would break container)
     f.whiteSpace = f.multiLine && f.currentFontSize === f.minSize ? 'normal' : 'nowrap';
   };
@@ -243,6 +246,7 @@ exports.default = function (w) {
     minSize: 16,
     maxSize: 512,
     multiLine: true,
+    floorSize: true,
     observeMutations: 'MutationObserver' in w ? mutationObserverDefaultSetting : false
   };
 
